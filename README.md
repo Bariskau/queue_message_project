@@ -1,7 +1,4 @@
-# Queue Message Project
-
-## 📋 About the Project
-Queue Message Project is a modern web application that utilizes a message queuing system.
+# 📋Queue Message Project
 
 ## 🔧 Requirements
 - Docker Engine
