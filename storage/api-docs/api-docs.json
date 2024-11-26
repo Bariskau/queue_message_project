@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Message API Documentation",
+        "description": "API endpoints for managing messages",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/sent-messages": {
+            "get": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Retrieve all sent messages",
+                "description": "Returns a collection of all sent messages",
+                "operationId": "getSentMessages",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "uuid": {
+                                                "type": "string",
+                                                "example": "550e8400-e29b-41d4-a716-446655440000"
+                                            },
+                                            "phone_number": {
+                                                "type": "string",
+                                                "example": "+905551234567"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "example": "Message content"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "sent"
+                                            },
+                                            "message_id": {
+                                                "type": "string",
+                                                "example": "MSG123456"
+                                            },
+                                            "sent_at": {
+                                                "type": "string",
+                                                "format": "datetime",
+                                                "example": "2024-01-01 12:00:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Messages",
+            "description": "Messages"
+        }
+    ]
+}
