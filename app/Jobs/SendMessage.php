@@ -39,7 +39,8 @@ class SendMessage implements ShouldQueue, ShouldBeUnique
     }
 
     /**
-     * Add a rate limit middleware for the job
+     * Add a rate limit middleware for the job.
+     * TODO It is a much more logical solution to create and schedule different windows before dispatching jobs.
      * @return SendMessageMiddleware[]
      */
     public function middleware(): array

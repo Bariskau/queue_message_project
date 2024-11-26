@@ -31,6 +31,7 @@ class ProcessMessages extends Command
 
         foreach ($messages as $message) {
 
+            // If the number of characters is greater than x, an operation can be performed
             if (strlen($message->content) > 100) {
                 info("message longer than 100 characters: {$message->content}");
             }
