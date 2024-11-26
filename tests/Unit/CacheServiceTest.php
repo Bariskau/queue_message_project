@@ -15,7 +15,6 @@ class CacheServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Redis::flushall();
         $this->cacheService = new CacheService();
     }
 
@@ -29,6 +28,19 @@ class CacheServiceTest extends TestCase
             messageId: $webhookMessageId,
             sentAt: '2024-01-01T00:00:00Z'
         );
+
+        Redis::shouldReceive('hget')
+            ->once()
+            ->with('messages', $messageId)
+            ->andReturn(json_encode([
+                'message_id' => $webhookMessageId,
+                'sent_at' => '2024-01-01T00:00:00Z'
+            ]));
+
+        Redis::shouldReceive('hset')
+            ->once()
+            ->with('messages', $messageId, \Mockery::any())
+            ->andReturn(1);
 
         // Act
         $this->cacheService->storeMessageInfo($dto);

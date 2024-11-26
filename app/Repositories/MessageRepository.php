@@ -37,6 +37,7 @@ class MessageRepository implements MessageRepositoryInterface
             'message_id' => $messageId,
             'sent_at'    => $date
         ]);
+
         return $date->toISOString();
     }
 
@@ -50,7 +51,9 @@ class MessageRepository implements MessageRepositoryInterface
     public function updateMessage(string $uuid, array $payload): bool
     {
         $message = Message::query()->where('uuid', $uuid)->first();
+
         if (!$message) return false;
+
         return $message->update($payload) > 0;
     }
 }

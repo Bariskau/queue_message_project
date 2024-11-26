@@ -30,6 +30,11 @@ class ProcessMessages extends Command
         $messages = $messageService->getPendingMessages();
 
         foreach ($messages as $message) {
+
+            if (strlen($message->content) > 100) {
+                info("message longer than 100 characters: {$message->content}");
+            }
+
             SendMessage::dispatch($message);
         }
     }

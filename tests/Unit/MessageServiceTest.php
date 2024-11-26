@@ -7,9 +7,7 @@ use App\Enums\MessageStatus;
 use App\Events\MessageSent;
 use App\Models\Message;
 use App\Repositories\MessageRepository;
-use App\Services\CacheService;
 use App\Services\MessageService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Mockery;
@@ -17,12 +15,9 @@ use Tests\TestCase;
 
 class MessageServiceTest extends TestCase
 {
-    use RefreshDatabase;
-
     private MessageService $service;
     private MessageRepository $repository;
     private MessageWebhookClient $client;
-    private CacheService $cacheService;
 
     protected function setUp(): void
     {
@@ -42,7 +37,7 @@ class MessageServiceTest extends TestCase
     public function test_get_pending_messages()
     {
         // Arrange
-        $expectedMessages = Message::factory()->count(2)->create();
+        $expectedMessages = Message::factory()->count(2)->make();
         $this->repository->shouldReceive('getMessagesByStatus')
             ->with(MessageStatus::PENDING)
             ->once()

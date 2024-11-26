@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Client\MessageWebhookClient;
-use App\DTOs\MessageResponseDTO;
 use App\Enums\MessageStatus;
 use App\Events\MessageSent;
 use App\Exceptions\MessageSendException;

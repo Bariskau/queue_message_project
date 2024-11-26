@@ -22,6 +22,7 @@ class SendMessage implements ShouldQueue, ShouldBeUnique
      */
     public int $maxExceptions = 3;
 
+
     /**
      * Create a new job instance.
      */
@@ -72,7 +73,7 @@ class SendMessage implements ShouldQueue, ShouldBeUnique
     /**
      * Handle a job failure.
      */
-    public function failed(): void
+    public function failed(?\Throwable $e): void
     {
         $messageService = app(MessageService::class);
         $messageService->handleFail($this->message->uuid);
