@@ -36,14 +36,14 @@ RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 
 WORKDIR /var/www/html
 
-# Önce composer dosyalarını kopyala ve bağımlılıkları yükle
+# First copy composer files and install dependencies
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts --no-autoloader --prefer-dist
 
-# Tüm uygulama dosyalarını kopyala
+# Copy all application files
 COPY . .
 
-# Laravel kurulumu ve optimizasyonları
+# Laravel installation and optimizations
 RUN cp .env.example .env \
     && composer dump-autoload --optimize \
     && php artisan key:generate --force \
@@ -51,7 +51,7 @@ RUN cp .env.example .env \
     && php artisan view:cache \
     && php artisan config:cache
 
-# Laravel için storage ve bootstrap/cache izinlerini ayarla
+# Set permissions for Laravel storage and bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
