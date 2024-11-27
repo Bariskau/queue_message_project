@@ -12,13 +12,10 @@ docker-compose up -d
 echo "3. Waiting for containers to be ready..."
 sleep 10
 
-echo "4. Installing dependencies..."
-docker-compose exec -T app composer install
-
-echo "5. Generating application key..."
+echo "4. Generating application key..."
 docker-compose exec -T app php artisan key:generate
 
-echo "6. Running database migrations..."
+echo "5. Running database migrations..."
 docker-compose exec -T app php artisan migrate --seed
 
 echo "Setup completed successfully!"

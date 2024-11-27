@@ -36,22 +36,17 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-### 4. Install Dependencies
-```bash
-docker-compose exec app composer install
-```
-
-### 5. Generate Application Key
+### 4. Generate Application Key
 ```bash
 docker-compose exec app php artisan key:generate
 ```
 
-### 6. Run Database Migrations
+### 5. Run Database Migrations
 ```bash
 docker-compose exec app php artisan migrate --seed
 ```
 
-### 7. Process Messages
+### Process Messages
 ```bash
 docker-compose exec app php artisan messages:process
 ```

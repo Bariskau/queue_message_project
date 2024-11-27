@@ -36,5 +36,8 @@ RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 
 WORKDIR /var/www/html
 
+COPY docker/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Start services
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
