@@ -23,6 +23,7 @@ RUN pecl install redis && docker-php-ext-enable redis
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer self-update --2
 
 # Configure PHP
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini

@@ -46,17 +46,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate --seed
 ```
 
-### 7. Install Horizon
-```bash
-docker-compose exec app php artisan horizon:install
-```
-
-### 8. Generate Swagger Documentation
-```bash
-docker-compose exec app php artisan l5:generate
-```
-
-### 9. Process Messages
+### 7. Process Messages
 ```bash
 docker-compose exec app php artisan messages:process
 ```
