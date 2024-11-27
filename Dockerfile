@@ -36,8 +36,24 @@ RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
 
 WORKDIR /var/www/html
 
-COPY docker/docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# Önce composer dosyalarını kopyala ve bağımlılıkları yükle
+COPY composer.json composer.lock ./
+RUN composer install --no-scripts --no-autoloader --prefer-dist
+
+# Tüm uygulama dosyalarını kopyala
+COPY . .
+
+# Laravel kurulumu ve optimizasyonları
+RUN cp .env.example .env \
+    && composer dump-autoload --optimize \
+    && php artisan key:generate --force \
+    && php artisan optimize \
+    && php artisan view:cache \
+    && php artisan config:cache
+
+# Laravel için storage ve bootstrap/cache izinlerini ayarla
+RUN chmod -R 775 storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
 
 # Start services
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

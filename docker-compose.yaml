@@ -13,8 +13,6 @@ services:
     image: insider-app
     container_name: insider-app
     restart: unless-stopped
-    volumes:
-      - ./:/var/www/html
     networks:
       - insider
     extra_hosts:

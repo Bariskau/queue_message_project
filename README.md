@@ -21,11 +21,6 @@ git clone https://github.com/Bariskau/queue_message_project.git
 cd queue_message_project
 ```
 
-### Install it automatically or follow the steps below.
-```bash
-chmod +x setup.sh && ./setup.sh
-```
-
 ### 2. Set Environment Variables
 ```bash
 cp .env.example .env
@@ -46,7 +41,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate --seed
 ```
 
-### Process Messages
+## Process Messages
 ```bash
 docker-compose exec app php artisan messages:process
 ```
