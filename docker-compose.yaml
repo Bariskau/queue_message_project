@@ -7,11 +7,12 @@ services:
       args:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
+    depends_on:
+      - redis
+      - db
     image: insider-app
     container_name: insider-app
     restart: unless-stopped
-    volumes:
-      - ./:/var/www/html
     networks:
       - insider
     extra_hosts:
